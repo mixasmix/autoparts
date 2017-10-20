@@ -1,0 +1,213 @@
+@charset "UTF-8";
+/*первый цвет шалона, красный в std*/
+/*второй цвет шаблона, сервый в std шаблоне*/
+/*третий, вспомогательный, темно красный цвет шаблона*/
+/*высота header*/
+/*высота навигации*/
+/*высота футера*/
+/*высота блока контента в футере*/
+/*миксин поля для ввода*/
+/*миксин кнопок типа input*/
+/*миксин кнопок типа ссылка*/
+/*MEDIA queries*/
+/**
+вспомогательные классы
+*/
+.display_block {
+  display: block;
+  outline: none; }
+
+.flex {
+  display: flex; }
+
+.align_center {
+  text-align: center; }
+
+/*
+Основные классы
+*/
+.header {
+  min-height: 170px;
+  padding: 30px; }
+
+.logo__anchor {
+  width: 200px;
+  height: 110px;
+  background: url(/images/logo.png) no-repeat 0px 0px; }
+  @media only screen and (max-width: 979px) {
+    .logo__anchor {
+      margin: 0 auto; } }
+
+.contacts__phone, .contacts__email, .social {
+  max-width: 200px; }
+  @media only screen and (max-width: 979px) {
+    .contacts__phone, .contacts__email, .social {
+      margin: 0 auto; } }
+
+.contacts__phone-icon {
+  width: 20px;
+  margin: auto 0;
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 20px;
+  height: 20px;
+  color: white; }
+
+.contacts__email-icon {
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: 0 -20px;
+  width: 20px;
+  height: 20px;
+  color: white;
+  margin: auto 0; }
+
+.contacts__phonenumber {
+  color: #6E7D94;
+  font-weight: bold; }
+
+.contacts__phonenumber-par {
+  font-size: 18px;
+  margin: 0px; }
+
+.contacts__email-text {
+  padding-left: 10px; }
+
+.social__graphic-header, .social__graphic-shedile {
+  color: #6E7D94;
+  font-weight: bold; }
+
+.facebookIcon {
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: -20px 0px;
+  width: 20px;
+  height: 20px;
+  color: white; }
+  .facebookIcon:hover {
+    background-image: url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -20px -20px;
+    width: 20px;
+    height: 20px;
+    color: white; }
+
+.twitterIcon {
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: -43px 0px;
+  width: 20px;
+  height: 20px;
+  color: white; }
+  .twitterIcon:hover {
+    background-image: url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -43px -20px;
+    width: 20px;
+    height: 20px;
+    color: white; }
+
+.vkIcon {
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: -66px 0px;
+  width: 20px;
+  height: 20px;
+  color: white; }
+  .vkIcon:hover {
+    background-image: url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -66px -20px;
+    width: 20px;
+    height: 20px;
+    color: white; }
+
+.okIcon {
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: -89px 0px;
+  width: 20px;
+  height: 20px;
+  color: white; }
+  .okIcon:hover {
+    background-image: url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -89px -20px;
+    width: 20px;
+    height: 20px;
+    color: white; }
+
+.mailruIcon {
+  background-image: url(/images/phone_mail_sprite.png);
+  background-repeat: no-repeat;
+  background-position: -112px 0px;
+  width: 20px;
+  height: 20px;
+  color: white; }
+  .mailruIcon:hover {
+    background-image: url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -112px -20px;
+    width: 20px;
+    height: 20px;
+    color: white; }
+
+.social__graphicSocialLinkList {
+  list-style-type: none;
+  justify-content: space-between;
+  padding-left: 10px;
+  max-width: 160px; }
+
+.backet, .login {
+  max-width: 250px; }
+  @media only screen and (max-width: 979px) {
+    .backet, .login {
+      margin: 0 auto; } }
+
+.backet__counter, .backet__summ {
+  height: 35px;
+  color: white;
+  font-weight: bold;
+  line-height: 35px;
+  text-align: center; }
+
+.backet__counter {
+  background: #D31F25;
+  position: relative; }
+  .backet__counter::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #EE4136;
+    background-image: url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -13px -37px;
+    width: 35px;
+    height: 35px;
+    color: white;
+    widht: 35px;
+    height: 35px; }
+
+.backet__summ {
+  background: #6E7D94; }
+
+.login {
+  margin-top: 10px; }
+
+.login__link {
+  color: #6E7D94;
+  font-weight: bold; }
+
+.horizontalMenu {
+  min-height: 40px;
+  background: #E1E4E7;
+  line-height: 40px; }
+
+.horizontalMenu .nav li a {
+  padding: 0; }
+  .horizontalMenu .nav li a::hover {
+    background: #6E7D94; }
+
+/*# sourceMappingURL=style.css.map */

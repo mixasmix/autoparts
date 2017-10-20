@@ -1,0 +1,349 @@
+$globalwidth: 980px;
+$bgColorTopNav: #E1E4E7;
+$stdFont:  "Helvetica Neue", Helvetica, Verdana, Arial, Geneva, sans-serif;
+$baseColorBlack:black;
+$baseColorWhite:white;
+$firstColor:#D31F25; /*первый цвет шалона, красный в std*/
+$secondColor:#6E7D94; /*второй цвет шаблона, сервый в std шаблоне*/
+$tridColor:#EE4136; /*третий, вспомогательный, темно красный цвет шаблона*/
+$heightHeader:170px; /*высота header*/
+$heightNavbar:40px;/*высота навигации*/
+$footerHeight:250px; /*высота футера*/
+$footerContentHeight:170px; /*высота блока контента в футере*/
+$fontSizeH4:18px;
+@mixin icon($left, $top, $h:20px, $w:20px){
+    background-image:url(/images/phone_mail_sprite.png);
+    background-repeat: no-repeat;
+    background-position: $left $top;
+    width: $w;
+    height:$h;
+    color: $baseColorWhite;
+}
+@mixin unlink{
+    display: block;
+    text-decoration: none;
+    outline: none;
+}
+/*миксин поля для ввода*/
+@mixin inputtext($w:200px, $h:32px, $fs:16px){
+    border: 1px solid $secondColor;
+    border-radius: 5px;
+    width: $w;
+    height:$h;
+    text-align: center;
+    font-size: 18px;
+    color: $secondColor;
+}
+/*миксин кнопок типа input*/
+@mixin inputbutton($w:200px, $h:32px, $fs:16px){
+    height:$h;
+    border-bottom:4px solid $tridColor;
+    text-align:center;
+    border-radius:5px;
+    max-width:$w;
+    background:$firstColor;
+    cursor:pointer;
+    font-size:$fs;
+    color:$baseColorWhite;
+    outline: none;
+    line-height: $fs;
+    &:active{
+        background:$tridColor;
+	border-bottom:none;
+	border-top:4px solid $firstColor;
+	outline: none;
+    }
+    &:focus{
+        outline: none;
+    }
+    &::hover{
+        background:$tridColor;
+    }
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner {
+        border: none;
+    }
+}
+/*миксин кнопок типа ссылка*/
+@mixin a_button($w:200px, $h:32px, $fs:16px){
+    display: block;
+    text-align: center;
+    height: $h;
+    width: $w;
+    margin: 0 auto;
+    line-height: $h;
+    text-decoration: none;
+    background: $firstColor;
+    border-radius: 5px;
+    border-bottom: 4px solid $tridColor;
+    font-size: $fs;
+    color:$baseColorWhite;
+    &:active{
+        background:$tridColor;
+	border-bottom:none;
+	border-top:4px solid $firstColor;
+	outline: none;
+        text-decoration: underline;
+    }
+    &:hover{
+         color:$baseColorWhite;
+        text-decoration: underline;
+    }
+    &:focus{
+        outline: none;
+    }
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner {
+        border: none;
+    }
+}
+/*MEDIA queries*/
+$small: 550px;
+$large: 980px;
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and /*(min-width: $small + 1) and*/ (max-width: $large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $large) { @content; }
+  }
+}
+/**
+вспомогательные классы
+*/
+.display_block{
+    display:block;
+    outline: none;
+}
+.inline_block{
+    display:inline-block;
+    outline: none;
+}
+.flex{
+    display: flex;
+}
+.align_center{
+    text-align: center;
+}
+.align_center_block{
+    margin:0 auto;
+}
+.float_none{
+    float:none;
+}
+.bg_nav{
+    background-color:$bgColorTopNav;
+}
+.padding10{
+    padding:10px;
+}
+.margin10{
+    margin:10px;
+}
+
+/*
+Основные классы
+*/
+.header{
+    min-height: $heightHeader;
+    padding:30px;
+    
+}
+.logo__anchor{
+    width:200px;
+    height:110px;
+    background: url(/images/logo.png) no-repeat 0px 0px;
+    @include respond-to(medium-screens) {
+        margin:0 auto;
+    }
+}
+.contacts__phone, .contacts__email, .social{
+   max-width: 200px;
+    @include respond-to(medium-screens) {
+        margin:0 auto;
+    }
+}
+.contacts__phone-icon{
+    width: 20px;
+    margin: auto 0;
+    @include icon(0, 0);
+}
+.contacts__email-icon{
+    @include icon(0, -20px);
+    margin: auto 0;
+}
+.contacts__phonenumber{
+    color:$secondColor;
+    font-weight:bold;
+}
+.contacts__phonenumber-par{
+    font-size: $fontSizeH4;
+    margin:0px;
+}
+.contacts__email-text{
+    padding-left:10px; 
+}
+.social__graphic-header, .social__graphic-shedile{
+    color:$secondColor;
+    font-weight: bold;
+}
+
+.facebookIcon{
+    @include icon(-20px, 0px);
+     &:hover{
+         @include icon(-20px, -20px);
+    }
+}
+.twitterIcon{
+    @include icon(-43px, 0px);
+     &:hover{
+         @include icon(-43px, -20px);
+    }
+}
+.vkIcon{
+    @include icon(-66px, 0px);
+     &:hover{
+         @include icon(-66px, -20px);
+    }
+}
+.okIcon{
+    @include icon(-89px, 0px);
+     &:hover{
+         @include icon(-89px, -20px);
+    }
+}
+.mailruIcon{
+    @include icon(-112px, 0px);
+     &:hover{
+         @include icon(-112px, -20px);
+    }
+}
+.social__graphicSocialLinkList{
+    list-style-type: none;
+    justify-content: space-between;
+    padding-left:10px;
+    max-width: 160px;
+}
+.backet, .login{
+     @include respond-to(medium-screens) {
+        margin: 0 auto;
+    }
+    max-width: 250px;
+}
+.backet__counter, .backet__summ{
+    height:35px;
+    color:$baseColorWhite;
+    font-weight:bold;
+    line-height:35px;
+    text-align:center;
+}
+.backet__counter{
+    background: $firstColor;
+    position:relative;
+    &::after{
+        content:'';
+        position:absolute;
+        left:0;
+        top:0;
+        background-color: $tridColor;
+        @include icon(-13px, -37px, 35px, 35px);
+        widht:35px;
+        height:35px;
+    }
+}
+.backet__summ{
+    background: $secondColor;
+}
+.login{
+   margin-top:10px;
+}
+.login__link{
+    color:$secondColor;
+    font-weight: bold;
+}
+.horizontalMenu{
+    min-height: 40px;
+    background: $bgColorTopNav;
+    line-height: 40px;
+    
+    li a{
+        color:$baseColorBlack;
+        font-size:15px;
+        &:hover{
+            color:$baseColorWhite;
+            background: $secondColor; 
+            border-radius: 0;
+        }
+        padding: 0 20px;
+    }
+   
+}
+.align_center_block{
+    display: block;
+    text-align: center;
+}
+.search-block__input{
+    max-width: 500px;
+    min-height: 40px;
+   
+}
+.search-block__submit{
+     @include inputbutton(500px, 40px, 24px); 
+     display: block;
+     width:100%; 
+     margin: 0 auto;
+}
+.search__input-area{
+    text-align: center;
+}
+main{
+    padding: 10px;
+}
+.btn{
+    &:hover, &:focus{
+        color:  $baseColorWhite;
+    }
+}
+.add_backet_btn{
+   @include inputbutton(); 
+}
+
+/*Стили личного кабинета пользователя*/
+.private-user-link{
+    font-size: 20px;
+}
+.private-user-point-icon{
+    width: 32px;
+    height: 32px;
+    background-color: $baseColorWhite;
+    border-radius: 15px;
+    text-align: center;
+    margin-right:10px;
+    & span{
+        font-size: 20px;    
+        vertical-align: middle;
+
+    }
+}
+.private-user-description{
+    color:$secondColor;
+    padding-left: 42px;
+}
+.confirm_order_form{
+    max-width: 500px;
+}
+.confirm_order_form_comment{
+    min-height: 300px;
+}

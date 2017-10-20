@@ -1,0 +1,156 @@
+/*
+** Функция возвращат объект XMLHttpRequest
+*/
+
+$(".linkaddbacket").click(function(event){
+	event.preventDefault();	
+});
+
+
+function getXmlHttpRequest()
+{
+	if (window.XMLHttpRequest) 
+	{
+		try 
+		{
+			return new XMLHttpRequest();
+		} 
+		catch (e){}
+	} 
+	else if (window.ActiveXObject) 
+	{
+		try 
+		{
+			return new ActiveXObject('Msxml2.XMLHTTP');
+		} catch (e){}
+		try 
+		{
+			return new ActiveXObject('Microsoft.XMLHTTP');
+		} 
+		catch (e){}
+	}
+	return null;
+}
+
+//Надо назначить слушателя событий для button
+window.onload=function(){
+	document.getElementById('searchPart').addEventListener('click', getPart);
+	$.ajax({url: "/addbacket/check/",  success: checkbacket});
+
+}
+function addParts(dat, n){
+	$.ajax({ type: "POST", url: "/parts/addparts/"+n, data: "parts="+dat,  success: function(){}});
+}
+function getPart(event){
+	event.preventDefault();
+		addpage.count=false;
+		addpage.all = false;	
+	//получаем объект поля ввода номера
+	var part=document.getElementById('partNumber');
+	//если value не равно пустой строке то делаем запрос
+	if(part.value){
+		for(var i=1; i<=11; i++){
+			$.ajax({url: "/parts/getparts/"+part.value+"/"+i+"/",  success: addpage});
+		}	
+			//$.get('/parts/getparts/2888',  '', addpage(data));
+		document.getElementById('search').innerHTML="Идет поиск...";
+	}
+	//иначе проверем не пусто ли поле vin
+	else {
+		var vin=document.getElementById('vinNumber');
+		//
+		//
+		// Здесь надо буцдет работать с каталогом Пока оставим, разберемся с parts
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+	}
+  }
+
+		
+function addpage(d){
+	//так, пришли данные. 
+	// проверяем существование блока partlist и таблицы
+	// если таблицы нет, то создаем ее
+	if(!$('div').is('#partlist')){
+		//добавляем элемент
+		$('#body-container').html('<div id="partlist"></div>');
+		$('#partlist').html("<table id='partlisttable'><thead><tr class='partlisttable_tr'><th>Артикул</th><th>Производитель</th><th>Описание</th><th>Изображение</th><th>Срок доставки</th><th>Вероятность отгрузки</th><th>Цена</th><th>В корзину</th></tr></thead><tbody></tbody></table>");
+	} 
+	// если есть, то пишем в нее
+	if(d){
+		/*Распарсиваем JSON*/
+		
+		var data=JSON.parse(d);
+		console.log(data.length);
+		addParts(d, addpage.count);
+	} else {
+		return false;
+	}
+	
+	if(data.length){
+		addpage.all+=data.length;
+	}
+	
+	for(var i=0; i<data.length; i++){
+			/**Расчет указателя */
+			if(data[i].chance_of_shipment=="н/д"){
+				var pointer=-5;
+			} else {
+				var pointer=data[i].chance_of_shipment;
+			}
+				var shipment_pointer="style='margin-left:"+pointer+"px'";
+			/**Расчет указателя */
+			/**/
+				var origin_point;
+				if(data[i].origin==1)
+					origin_point="style='background-color:#F0FFF0'";
+				else 
+					origin_point='';
+			/**/
+			insert_string='<tr '+origin_point+'><td>'+data[i].artikul+'</td><td><p>'+data[i].brandName+'</p><div class="parts_rating rating0"></div></td><td class="parttable_description">'+data[i].description+'</td><td><a class="img_parts" href="#"></a></td><td>'+data[i].delivery_period+'</td><td><div class="shipment"><p>'+data[i].chance_of_shipment+'</p><div class="shipment_progress"></div><div class="shipment_pointer"><div class="pointer" '+shipment_pointer+'></div></div></div></td><td>'+data[i].price+'</td><td><a href="/addbacket/add/'+data[i].uniqueid+"_"+data[i].provider+'" onclick="addBacket(\''+data[i].uniqueid+'_'+data[i].provider+'_'+data[i].artikul+'_'+data[i].price+'\')" class="linkaddbacket">В корзину</a></td></tr>';
+				
+			var tbody=$('#partlisttable tbody');
+				/*tbody.append(insert_string);*/
+			
+			//$("#partlisttable").tablesorter({sortList: [[6,0]]});
+	}
+	$(".linkaddbacket").click(function(event){
+	event.preventDefault();	
+});
+}
+/*
+Функция доваления товара в корзину. Надо вывести диалоговое окно с выбором количества товара
+**/
+function addBacket(arg){
+	//может быть имеет смысл сделать хранение корзины в куках
+	$.ajax({url: "/addbacket/add/"+arg+"/_count_",  success: checkbacket});
+}
+/*Обновляет корзину*/
+function checkbacket(d){
+	console.log(d);
+	var data = JSON.parse(d);
+	$('#quantity').find('span').text(data[0]);
+	$('#summ').text(data[1]);
+}
+/***/
+/*если сервер вызвал*/
+function getParts(parts){
+					addpage.count=false;
+					addpage.all = false;
+				//получаем объект поля ввода номера
+					for(var i=1; i<=11; i++){
+						$.ajax({url: "/parts/getparts/"+parts+"/"+i+"/",  success: addpage});
+					}	
+						//$.get("/parts/getparts/2888",  "", addpage(data));
+		document.getElementById("content_text").innerHTML="Идет поиск...";
+  }

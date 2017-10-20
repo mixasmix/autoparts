@@ -1,0 +1,548 @@
+
+/* 
+    Created on : 13.07.2016, 12:37:01
+    Author     : Миха
+*/ 
+$globalwidth: 980px;
+$bgColorTopNav: #E1E4E7;
+$stdFont:  "Helvetica Neue", Helvetica, Verdana, Arial, Geneva, sans-serif;
+$baseColorBlack:black;
+$baseColorWhite:white;
+$firstColor:#D31F25; /*первый цвет шалона, красный в std*/
+$secondColor:#6E7D94; /*второй цвет шаблона, сервый в std шаблоне*/
+$tridColor:#EE4136; /*третий, вспомогательный, темно красный цвет шаблона*/
+$heightHeader:145px; /*высота header*/
+$heightNavbar:40px;/*высота навигации*/
+$footerHeight:250px; /*высота футера*/
+$footerContentHeight:170px; /*высота блока контента в футере*/
+@mixin icon($left, $top, $h:20px, $w:20px){
+    background: url(/images/phone_mail_sprite.png) no-repeat;
+    background-position: $left $top;
+    width: $w;
+    height:$h;
+    color: $baseColorWhite;
+}
+@mixin unlink{
+    display: block;
+    text-decoration: none;
+    outline: none;
+}
+/*миксин поля для ввода*/
+@mixin inputtext($w:200px, $h:32px, $fs:16px){
+    border: 1px solid $secondColor;
+    border-radius: 5px;
+    width: $w;
+    height:$h;
+    text-align: center;
+    font-size: 18px;
+    color: $secondColor;
+}
+/*миксин кнопок типа input*/
+@mixin inputbutton($w:200px, $h:32px, $fs:16px){
+    height:$h;
+    border-bottom:4px solid $tridColor;
+    text-align:center;
+    border-radius:5px;
+    width:$w;
+    background:$firstColor;
+    cursor:pointer;
+    font-size:$fs;
+    color:$baseColorWhite;
+    outline: none;
+    &:active{
+        background:$tridColor;
+	border-bottom:none;
+	border-top:4px solid $firstColor;
+	outline: none;
+    }
+    &:focus{
+        outline: none;
+    }
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner {
+        border: none;
+    }
+}
+/*миксин кнопок типа ссылка*/
+@mixin a_button($w:200px, $h:32px, $fs:16px){
+    display: block;
+    text-align: center;
+    height: $h;
+    width: $w;
+    margin: 0 auto;
+    line-height: $h;
+    text-decoration: none;
+    background: $firstColor;
+    border-radius: 5px;
+    border-bottom: 4px solid $tridColor;
+    font-size: $fs;
+    color:$baseColorWhite;
+    &:active{
+        background:$tridColor;
+	border-bottom:none;
+	border-top:4px solid $firstColor;
+	outline: none;
+        text-decoration: underline;
+    }
+    &:hover{
+         color:$baseColorWhite;
+        text-decoration: underline;
+    }
+    &:focus{
+        outline: none;
+    }
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner,
+    &::-moz-focus-inner {
+        border: none;
+    }
+}
+    
+
+*{
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    font-size: 0;
+    font-family: $stdFont;
+}
+html, body{
+    height:100%;
+}
+.container{
+    min-height:100%;
+}
+.globalwidth{
+    max-width:$globalwidth;
+    margin: 0 auto;
+}
+
+.navigation{
+     min-height: $heightNavbar;
+}
+.top-nav{
+    background: $bgColorTopNav;
+}
+.navigation__container{
+    font-size: 14px;
+}
+.navigation__menu{
+    
+}
+.navigation__list{
+    display: inline-block;
+}
+.navigation__link{
+    font-size: 16px;
+    display: block;
+    color: $baseColorBlack;
+    height: 40px;
+    padding: 0 5px;
+    line-height: 40px;
+    text-decoration: none;
+    &:hover{
+        background: $secondColor;
+        color:$baseColorWhite;
+        text-decoration: underline;
+    }
+}
+
+/*все что относится к футеру*/
+.footer_wrap{
+    height: $footerHeight;
+}
+.footer{
+    margin-top:-$footerHeight;
+    background-color:$secondColor;
+    height: $footerHeight;
+}
+.footer-content{
+    max-width: $globalwidth;
+    margin:0 auto;
+    height:$footerContentHeight;
+    display:flex;
+}
+.footer__logo_anchor{
+    @include unlink;
+    width:170px;
+    height:60px;
+    background: url(/images/logo.png) no-repeat 0 -138px;
+}
+.copyright{
+    margin: 30px 30px 0 30px;
+}
+.copyright_label{
+    font-size: 12px;
+    color:$baseColorWhite;
+}
+.footer-content__content{
+    display: flex;
+}
+.whitelink{
+    color:$baseColorWhite;
+    text-decoration: underline;
+    &:hover{
+        color:$baseColorBlack;
+    }
+}
+/*все что относится к хедеру*/
+.header{
+    min-height: $heightHeader;
+}
+.header-content{
+    display: flex;
+    min-height:$heightHeader;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+.logo__anchor{
+    @include unlink;
+    height:$heightHeader;
+    width:200px;
+    background: url(/images/logo.png) no-repeat;
+}
+/*Стили корзины*/
+.backet{
+    width:250px;
+    margin-top: 20px;
+}
+.backet__count, .backet__summ{
+    height: 35px;
+    width:175px;
+}
+.backet__link{
+    @include unlink;
+}
+.backet__count{
+    background: $firstColor;
+}
+.backet__count_icon{
+    height: 35px;
+    width:35px; 
+    @include icon(-13px, -37px, 35px, 35px);
+    background-color: $tridColor;
+    float: left;
+}
+.backet__count_label{
+    margin: 0 0 0 40px;
+    color:$baseColorWhite;
+    font-size: 14px;
+    line-height: 35px;
+}
+.backet__count_counted{
+     font-size: 14px;
+}
+.backet__summ{
+    background: $secondColor;
+    text-align: center;
+    line-height: 35px;
+
+}
+.backet__summ_counted{
+    color:$baseColorWhite;
+    font-size:16px;
+    font-weight:bold;
+}
+/*END Стили корзины*/
+/*Стили книпки входа в ЛК*/
+.login__join{
+    margin:10px 0 0 0;
+    padding-left: 30px;
+}
+.login__join_link{
+     font-size:14px;
+     color:$secondColor;
+     &:before{
+         content: '';
+         display: block;
+         float:left;
+         @include icon(-281px, -2px);
+     }
+     &:hover{
+         color:$firstColor;
+         &:before{
+            @include icon(-281px, -22px);
+        }
+     }
+}
+/*END Стили книпки входа в ЛК*/
+.header-information__left{
+     height:$heightHeader;
+     width:250px;
+     
+}
+
+.header-information__right{
+     height:$heightHeader;
+     width:250px;
+    
+}
+.header-information__right_label{
+    margin-top:20px;
+}
+.header-information__right_labelspan{
+    font-size: 14px;
+    color: $secondColor;
+}
+.header-information__right_social{
+    margin-top:10px;
+}
+.social__list_link{
+    width:20px;
+    height:20px;
+    padding:0;
+    margin:0 5px;
+    &:hover{
+        background-color: transparent;
+    }
+}
+.social__list_link_fb{
+    @include icon(-20px, 0px);
+     &:hover{
+         @include icon(-20px, -20px);
+    }
+}
+.social__list_link_tw{
+    @include icon(-43px, 0px);
+     &:hover{
+         @include icon(-43px, -20px);
+    }
+}
+.social__list_link_vk{
+    @include icon(-66px, 0px);
+     &:hover{
+         @include icon(-66px, -20px);
+    }
+}
+.social__list_link_ok{
+    @include icon(-89px, 0px);
+     &:hover{
+         @include icon(-89px, -20px);
+    }
+}
+.social__list_link_ml{
+    @include icon(-112px, 0px);
+     &:hover{
+         @include icon(-112px, -20px);
+    }
+}
+
+.header-information__left_phonenumber{
+    margin-top: 20px;
+}
+.header-information__left_phonenumber_span{
+    
+    font-family: $stdFont;
+    font-size:18px;
+    font-weight: bold;
+    color:$secondColor;
+}
+.phoneicon{
+   display: inline-block;
+   margin: 10px;
+   float:left;
+   @include icon(0, 0);
+}
+.mailicon{
+   display: inline-block;
+   margin: 10px;
+   float:left;
+   @include icon(0, -20px);
+}
+.comm_link{
+    font-family: $stdFont;
+    font-style: italic;
+    font-size:12px;
+    color:$secondColor;
+    margin-left: 32px;
+    margin-bottom: 10px;
+    white-space:  nowrap;
+    text-decoration: none;
+    border-bottom: 1px dashed;
+    display: inline-block;
+}
+
+/*Стили основного контента*/
+.content{
+    max-width: $globalwidth;
+    margin:0 auto;
+}
+.main-content{
+    margin:20px 0;
+    
+}
+.main-content span, .main-content p, .main-content strong, .main-content b{
+    font-size: 16px;
+}
+.main-content strong, .main-content b{
+    font-weight: normal;
+}
+.main-content a{
+    font-size: 14px;
+    color:$secondColor;
+    text-decoration: underline;
+    font-weight: bold;
+    &:hover{
+        color:#662d91;
+    }
+}
+/*END Стили основного контента*/
+/*Стили отдельных страниц*/
+    /*стиль главной страницы*/
+    .h1_style{
+        text-align: center;
+        font-size:30px;
+        color:$secondColor;
+    }
+    .h6_style{
+        text-align: center;
+        font-size:14px;
+        color:$secondColor;
+    }
+    .search-block{
+        width: 450px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+    .input-text{
+        @include inputtext();
+    }
+    .search-block__input{
+        width: 450px;
+        height: 47px;
+    }
+    .input-button{
+        @include inputbutton;
+    }
+    .search-block__submit{
+        width: 450px;
+        height: 47px;
+        font-size:21px;
+    }
+    .searc-info p,
+    .searc-info span,
+    .searc-info strong,
+    .searc-info b,
+    .searc-info div,
+    .searc-info a{
+        color:$secondColor;
+        font-size: 14px;
+    }
+    .search-horizontal{
+        width:100%;
+    }
+    .search__input-area_horizontal{
+        display:flex;
+        justify-content:space-between;
+        width:100%;
+    }
+    .legend p{
+        font-size:10px;
+        color:$secondColor;
+    }
+    /**стили списка предложений*/
+            #partlist{
+
+            max-width:$globalwidth;;
+            margin:20px auto;
+
+            }
+            #partlisttable{
+                    display:table;
+                    border-collapse: collapse;
+            }
+            #partlisttable div{
+                    vertical-align:middle;
+            }
+            div.div_header, div.div_tr{
+                    display:table-row;
+
+            }
+            div.div_h, div.div_td{
+                    display:table-cell;
+            }
+
+            div.div_h{
+                    height:45px;
+                    background:#e1e4e7;
+                    padding:0 10px;
+                    border:2px solid #EEEEEF;
+                    font-size:13px;
+                    font-weight:normal;
+                    color:#6d6e71;
+            }
+            .tbody{
+                    display:table-row-group;
+            }
+            .col1, .col2,.col3, .col4, .col5, .col6, .col7, .col8, .col9, .col10,  .col11{
+
+                    vertical-align: middle;
+                    height:50px;
+                    border:2px solid #EEEEEF;
+                    text-align:center;
+                    font-size:16px;
+                    color:#000;
+
+            } 
+            .col1{
+                    width:10%;
+            }
+            .col2{
+                    width:20%;
+            }
+            .col3{
+                    width:300px;
+            }
+            .col4{
+                    width:100px;
+            }
+            .col5{
+                    width:10%;
+            }
+
+            .col6{
+                    width:10%;
+            }
+
+            .col7{
+                    width:50px;
+            }
+            .inp_count{
+                    border: 1px solid #ccc;
+                border-radius: 5px;
+                text-align: center;
+                width: 50px;
+            }
+            .col8{
+                    width:10%;
+            }
+
+            .col10{
+                    width:50px;
+            }
+            .col11{
+                width:44px;
+            }
+            div.col11 a.a_notebook_add{
+             /*  width: 40px;
+            height: 44px;
+            
+            background: transparent url("/images/phone_mail_sprite.png") no-repeat scroll -257px -81px;*/
+            @include icon(-257px, -81px, 40px, 44px);
+            display: block;
+            margin: 0 2px;
+            }
+            div.col9 a{
+                   @include a_button(127px, 32px, 13px);
+            }
+    /**END стили списка предложений*/
+    
+    /*END стиль главной страницы*/
+/*END Стили отдельных страниц*/

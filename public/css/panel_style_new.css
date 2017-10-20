@@ -1,0 +1,89 @@
+#content-container{
+    padding-top:100px;
+}
+
+/*стили брендлист*/
+table.table_brand_list{
+    width: 100%;
+    border-collapse: collapse;
+}
+table.table_brand_list td{
+        height: 50px;
+        border: 2px solid #EEEEEF;
+        text-align: center;
+        font-size: 16px;
+        color: #000;
+
+}
+a.a_table_brand_list{
+    position:relative;
+    padding: 5px;
+    margin: 0px auto;
+    color: #84B7F0;
+    font-size: 12px;
+    font-family: "Droid Sans",Arial,"Arial Unicode MS",Helvetica,sans-serif;
+    letter-spacing: 1px;
+}
+div.div_table_brand_list{
+    background: #6e7d94 none repeat scroll 0 0;
+    border-radius: 10px;
+    display: none;
+
+   box-shadow: 0 0 10px;
+    padding: 10px;
+    position: absolute;
+    word-break: break-all;
+    border: 1px solid red;
+    z-index: 10;
+    margin-top:-10px;
+}
+a.a_div_table_brand_list{
+    color:#fff;
+}
+/*конец стили брендлист*/
+
+
+/*стили комментарии к брендам*/
+table#brandvotelist_table{
+        width: 100%;
+        border-collapse: collapse;
+        position:relative;
+    }
+    table#brandvotelist_table td{
+        border:1px solid #527881;
+        text-align: center;
+    }
+    td.td_commnet{
+        
+    }
+    td.td_commnet span{
+        top:0;
+        display:block;
+        position: fixed;
+        background:#6E7D94;
+        color:white;
+        z-index:10;
+        border:1px solid black;
+        border-radius: 10px;
+        min-width: 400px;
+        min-height: 200px;
+    }
+/*конец стили комментарии к брендам*/
+
+#changelog  p{
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+
+}
+#users_edit table tr td{
+  padding: 0 10px;
+  border-color: #cecece;
+}
+
+span.order_table_manage_icon{
+    font-size: 35px;
+}
+
+.modal_new_position__link_finding_position{
+    font-size: 10px;
+}

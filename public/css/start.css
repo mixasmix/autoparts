@@ -1,0 +1,119 @@
+/* 
+    Created on : 01.07.2015, 10:02:26
+    Author     : Миха
+*/
+
+body {
+	margin:0px;
+}
+.table1 {
+	background: #EEEEEE;
+	BORDER: #828282 1px solid;
+}
+.table2 {
+	background: #CFCFCF;
+}
+.table2 tr {
+	background: #FFFFFF;
+}
+.table2wt {
+	border-left: 1px solid #CFCFCF;
+	border-right: 1px solid #CFCFCF;
+	border-bottom: 1px solid #CFCFCF;
+	background: #FFFFFF;
+}
+
+.bottom_line {
+	border-bottom: 1px solid #CFCFCF;
+}
+table, td {
+	font-family: Arial, Verdana;
+	font-size: 12px;
+}
+h2{
+	color: #006FA4;
+	font-size:16px;
+	font-family: Arial, Verdana;
+}
+h3{
+	color: #006FA4;
+	font-size:16px;
+	font-family: Arial, Verdana;
+}
+
+th {
+	text-align:left;
+	background-color: #808080;
+	color: #FFFFFF;
+}
+
+.head1 {
+	color: #000000;
+	text-align: left;
+	font-weight: bold;
+	background-color: #EEEEEE;
+}
+
+.head1 td {
+	color: #000000;
+	font-weight: bold;
+	background-color: #EEEEEE;
+}
+
+.head2 {
+	color: #000000;
+	text-align: left;
+	font-weight: bold;
+	background-color: #F3F3F3;
+}
+
+
+
+
+a {
+ color: #808080;
+}
+
+a:hover {
+	color: #FF0000;
+}
+
+.over {
+	cursor: pointer;
+}
+
+.coord {
+	cursor: pointer;
+}
+
+ul.ae li {
+	float:left;
+	list-style:none;
+}
+
+.way {
+	color: #000000;
+}
+.way a {
+	color: #000000;
+}
+.way a:hover {
+	color: #006FA4;
+}
+
+ul.way li {
+	float:left;
+	list-style:none;
+	
+}
+ul.way {
+	margin:0px;
+	padding:0px;
+	height:20px;
+}
+
+td.article {
+	text-align:center;
+	font-weight: bold;
+}
+
