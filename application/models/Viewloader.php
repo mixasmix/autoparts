@@ -12,8 +12,7 @@ class Viewloader extends CI_Model {
         private $sql;
 	public function __construct(){
 		parent::__construct();
-		$this->sql=SQL::getInstance();
-		$this->sql->query("SET NAMES 'utf8';");
+		$this->load->database();
                 $this->tmplname=($this->aauth->get_user_var('tmpl_name'))?$this->aauth->get_user_var('tmpl_name'):$this->config->item('default_template');
                 
         }

@@ -9,9 +9,8 @@ class Backet extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-        $this->sql = SQL::getInstance();
         $this->load->helper('cookie');
-        $this->sql->query("SET NAMES 'utf8';");
+        $this->load->database();
     }
 
     /*
@@ -26,8 +25,7 @@ class Backet extends CI_Model {
 
         $part_data = $this->cachemodel->load($post['uid']);
         //Добавляем позицию в корзину
-        $stm = $this->sql->prepare('CALL addBacketPosition(:artikul, :brand, :quantity, :supplier_price, :price, :description, :delivery, :uid, :time)');
-        $params = [
+        $stm = $this->db->query('CALL addBacketPosition(:artikul, :brand, :quantity, :supplier_price, :price, :description, :delivery, :uid, :time)', [
             ':artikul' => $part_data['artikul'],
             ':brand' => $part_data['brand'],
             ':quantity' => $post['quant'] * 1,
@@ -37,16 +35,13 @@ class Backet extends CI_Model {
             ':delivery' => $part_data['minperiod'] . '-' . $part_data['maxperiod'],
             ':uid' => $part_data['uid'],
             ':time' => time()
-        ];
-        $stm->execute($params);
-        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-        $stm->closeCursor();
-        if (empty($result[0]['insert_id'])) {
+        ]);
+      
+        
+        if (empty($stm->row()->insert_id)) {
             return false;
         }
-        
-        $stm->execute($params);
-        $stm = $this->sql->prepare('CALL addBacketStatePosition(:id_user, :id_backet, :id_status, :sid, :prov_id)');
+       
         $params = [
             ':id_user' => $this->aauth->get_user_id(),
             ':id_backet' => $result[0]['insert_id'],
@@ -54,9 +49,8 @@ class Backet extends CI_Model {
             ':sid' => session_id(),
             ':prov_id'=>$part_data['supplierId']
         ];
-       
-        $stm->execute($params);
-        $stm->closeCursor();
+        $stm2 = $this->db->query('CALL addBacketStatePosition(:id_user, :id_backet, :id_status, :sid, :prov_id)', $params);
+        
         header('Location: /page/find/' . $part_data['searchArtikul']);
     }
 
@@ -64,11 +58,11 @@ class Backet extends CI_Model {
       Проверяет состояние пользовательской корзины и возвращает сумму и количество товара в массиве
      */
     public function checkbacket($id = '') {
-        $stm = $this->sql->prepare('CALL checkBacketUserId(:user_id, :session_id)');
-        $stm->execute([':user_id' => $this->aauth->get_user_id(), ':session_id' => session_id()]);
-        $result = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
-        if (!empty($result)) {
-            return $result;
+       
+        $stm = $this->db->query('CALL checkBacketUserId ( '.$this->aauth->get_user_id().', "'.session_id().'");');
+       
+        if (!empty($stm->row())) {
+            return $stm->row();
         } else {
             return false;
         }

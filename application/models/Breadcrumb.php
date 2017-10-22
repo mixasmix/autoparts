@@ -7,13 +7,10 @@ if (!defined('BASEPATH'))
  * Класс работы с брендами
  */
 class Breadcrumb extends CI_Model {
-    private $sql; //тут у нас класс базы данных
 
     public function __construct() {
         parent::__construct();
-        $this->sql = SQL::getInstance();
         $this->load->helper('cookie');
-        $this->sql->query("SET NAMES 'utf8';");
         setlocale(LC_ALL, 'ru_RU');
     }
     /**

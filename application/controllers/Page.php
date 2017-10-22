@@ -19,7 +19,6 @@ class Page extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->sql = SQL::getInstance();
         $this->load->helper('security');
         $this->load->model('Backet', 'backet'); //загружаем модель корзины для получения текущих значений корзины пользователя
         $this->load->model('Breadcrumb', 'bc');
@@ -97,110 +96,7 @@ class Page extends CI_Controller {
         }
     }
 
-    public function secretpage() {
-        $this->pages('secretpage');
-    }
-
-    /**
-     * Работа с шинами
-     */
-    public function tires($action = '', $page = 0) {
-        $this->load->model('tireconfig', 'tc');
-        if ($action == 'getconfig') {
-            echo json_encode($this->tc->getAllInfoConfigurator());
-            Exit;
-        } elseif ($action == 'getconfigparam') {
-            $post = $this->input->post(null, true);
-            $tires = $this->tc->getInfoConfigurator($post);
-            $tire_table = $this->tc->tableGenerate($tires);
-
-            echo json_encode(array('len' => count($tires), 'content' => $tire_table));
-            exit;
-        }
-
-        $sess_data = $this->session_user_info;
-        $result_page[0]['sess_data'] = $sess_data;
-        $a['title'] = 'Каталог автомобильных шин';
-        $a['sess_data'] = $sess_data;
-        $this->load->view('head', $a);
-
-        /**
-         * Подгружаем пагинацию
-         */
-        $lim = 20;
-        $this->load->library('pagination');
-        $config['base_url'] = '/page/tires/page/';
-        $config['total_rows'] = $this->tc->countTire();
-        $config['per_page'] = $lim;
-        $config['use_page_numbers'] = TRUE;
-        $config['first_link'] = 'Первая';
-        $config['last_link'] = 'Последняя';
-        $config['uri_segment'] = 4;
-        $this->pagination->initialize($config);
-        $pagination = $this->pagination->create_links();
-
-        $tires = $this->tc->getTirePage($page, $lim);
-
-        $tire_table = $this->tc->tableGenerate($tires);
-        if ($tires == false) {
-            show_404();
-        }
-
-        $result_page[0]['tires'] = $tire_table;
-        $result_page[0]['pagination'] = $pagination;
-        $brcmb['/page/pages/acessories/'] = 'Аксессуары';
-        if (!empty($page))
-            $brcmb['/page/tires/'] = 'Каталог шин';
-        $this->load->model('breadcrumb', 'bc');
-        $breadcrumbs = $this->bc->breadcrumbs($brcmb);
-        $result_page[0]['breadcrumbs'] = $breadcrumbs;
-        $this->load->view('header', array('auth' => $sess_data['role'], 'sessdata' => $sess_data));
-        $result_page[0]['content'] = $this->load->view('tires', $result_page[0], true);
-        $this->load->view('backet', $result_page[0]);
-        $this->load->view('content', $result_page[0]);
-        $this->load->view('footer');
-        $this->load->view('bottom', array('sess_data' => $sess_data));
-    }
-
-    public function contraktdetails($action = '') {
-        $this->load->model('Contdetails', 'cd');
-        if ($action == 'getmodel') {
-            $post = $this->input->post(null, true);
-
-            echo $this->cd->motorland('getmodel', array('mark_id' => !empty($post['id_mark']) ? $post['id_mark'] : false));
-            exit;
-        } elseif ($action == 'getoffers') {
-            $post = $this->input->post(null, true);
-            echo $this->cd->motorland('getoffers', $post);
-            exit;
-        } elseif ($action == 'showimages') {
-            $post = $this->input->post(null, true);
-
-            echo $this->cd->motorland('showimages', $post);
-            exit;
-        }
-        $sess_data = $this->session_user_info;
-        $result_page[0]['sess_data'] = $sess_data;
-        $a['title'] = 'Каталог контрактных деталей';
-        $a['sess_data'] = $sess_data;
-        $this->load->view('head', $a);
-
-        $this->load->model('breadcrumb', 'bc');
-        $breadcrumbs = $this->bc->breadcrumbs();
-        $result_page[0]['breadcrumbs'] = $breadcrumbs;
-
-        $result_page[0]['marks'] = $this->cd->motorland('getmark');
-        $result_page[0]['partsname'] = $this->cd->motorland('getpartsname');
-        $result_page[0]['sort_by'] = $this->cd->motorland('getsotrby');
-        $result_page[0]['order_by'] = $this->cd->motorland('getorderby');
-        $result_page[0]['content'] = $this->load->view('contdetail', $result_page[0], true);
-
-        $this->params['title'] = 'Проверка состояния вашего заказа';
-        $this->params['content'] = $result_page[0]['content'];
-        $this->load->model('viewloader', 'vl');
-        echo $this->vl->getView($this->session_user_info, $this->params);
-    }
-
+    
     private function getpartpage($qs) {
         //echo phpinfo(); exit;
         $this->load->model('viewloader', 'vl');
@@ -231,12 +127,7 @@ class Page extends CI_Controller {
         echo $this->vl->getView($this->session_user_info, $this->params);
     }
 
-    /**
-     * Метод выводит позиции для сервиса
-     */
-    public function services() {
-        
-    }
+    
 
     /**
      * Метод аксессуаров

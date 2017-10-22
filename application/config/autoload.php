@@ -132,4 +132,4 @@ $autoload['language'] = array('interface');
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Viewloader'=>'viewloader', 'Usermodel'=>'usermodel', 'Cachemodel'=>'cachemodel');
+$autoload['model'] = array('Viewloader'=>'viewloader', 'Usermodel'=>'usermodel');

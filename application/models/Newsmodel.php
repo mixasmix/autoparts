@@ -5,9 +5,8 @@ class Newsmodel extends CI_Model {
 	public $errorMessage;
 	public function __construct(){
 		parent::__construct();
-		$this->sql=SQL::getInstance();
 		$this->load->helper('cookie');
-		$this->sql->query("SET NAMES 'utf8';");
+                $this->load->database();
 	}
         /**
          * Метод возвращает 20 последних новостей
@@ -17,9 +16,8 @@ class Newsmodel extends CI_Model {
             $limitStart=($page*$lim-$lim)<0?0:$page*$lim-$lim;
             $linitEnd=$limitStart+$lim;
             $sql="SELECT id, title, content, description, datetime FROM news WHERE deleted!=1 ORDER BY datetime DESC LIMIT ".$limitStart.", ".$linitEnd;
-            $stm=$this->sql->prepare($sql);
-            $stm->execute();
-            $result=$stm->fetchAll(PDO::FETCH_ASSOC);
+            $stm=$this->db->query($sql);
+            $result=$stm->row();
             if(!empty($result)){
                 return $result;
             }else{
